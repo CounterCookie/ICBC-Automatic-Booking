@@ -1,0 +1,55 @@
+{
+  "allday": false,
+  "appId": "qmaticwebbooking",
+  "blocking": false,
+  "branch": {
+    "addressCity": "North Vancouver",
+    "addressLine1": "1331 Marine Drive",
+    "addressZip": "V7P 3E5",
+    "custom": "{\"names\":{\"en\":\"North Vancouver\"}}",
+    "id": "80a96ca1218413463f6601d41d2e97391e2b9da1aadaf033220be663264db0f3",
+    "internalId": 10,
+    "name": "North Vancouver",
+    "qpId": "4",
+    "timeZone": "America/Vancouver"
+  },
+  "branchName": "North Vancouver",
+  "created": 1631579511578,
+  "date": "2021-10-20",
+  "duration": 40,
+  "peopleServices": [],
+  "publicBranchId": "80a96ca1218413463f6601d41d2e97391e2b9da1aadaf033220be663264db0f3",
+  "publicId": "7eb75d87a9c323bc2783fac070b85676aed500b55ddc0f5f1e83a98825a5f50d",
+  "publicServiceId": "da8488da9b5df26d32ca58c6d6a7973bedd5d98ad052d62b468d3b04b080ea25",
+  "serviceName": "B: Single knowledge test for a new or expired learner’s licence (45 min)",
+  "services": [
+    {
+      "name": "B: Single knowledge test for a new or expired learner’s licence (45 min)",
+      "publicId": "da8488da9b5df26d32ca58c6d6a7973bedd5d98ad052d62b468d3b04b080ea25"
+    }
+  ],
+  "status": 10,
+  "time": "09:55",
+  "title": "Pending reservation"
+}
+
+
+
+
+{
+ "addressCity": "Abbotsford",
+ "addressLine1": "31935 South Fraser Way",
+ "addressLine2": "Unit 150",
+ "addressZip": "V2T 5N7",
+ "custom": "{\"names\":{\"en\":\"Abbotsford\"}}",
+ "id": "7ca7e51b73b388a05f1d86a1d69f113272388294d514d3bfb71e8a2cc11db379",
+ "internalId": 1,
+ "name": "Abbotsford",
+ "qpId": "10",
+ "timeZone": "America/Vancouver"
+}
+
+
+
+RESERVE DATA SENT TO https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule/branches/80a96ca1218413463f6601d41d2e97391e2b9da1aadaf033220be663264db0f3/dates/2021-10-28/times/13:40/reserve;customSlotLength=10
+{"services":[{"publicId":"da8488da9b5df26d32ca58c6d6a7973bedd5d98ad052d62b468d3b04b080ea25"}],"custom":"{\"peopleServices\":[{\"publicId\":\"da8488da9b5df26d32ca58c6d6a7973bedd5d98ad052d62b468d3b04b080ea25\",\"qpId\":\"3\",\"adult\":1,\"name\":\"B: Single knowledge test for a new or expired learner’s licence (45 min)\",\"child\":0}]}"}

@@ -99,7 +99,8 @@ def reserve():
         session.cookies
 
 # Set and get initial cookies required throughout form completion
-with session.get("https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule/configuration"):
+with session.get("https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule/configuration") as init_config:
+    print(json.loads(init_config)['token'])
     find_services()
     find_branches()
     find_dates()

@@ -1,7 +1,7 @@
 import json, requests
 
 # So we're not very obvious
-http_headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.0.0 Safari/537.36'}
+http_headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.0.0 Safari/537.36', 'content-type': 'application/json'}
 session = requests.Session()
 
 def find_services():
@@ -17,7 +17,11 @@ def find_services():
         if service['name'][0] == service_letter:
             # escaped this var out of the function to global only, the rest aren't needed.
             global serviceid
+            global service_qpid
+            global service_name
             serviceid = service['publicId']
+            service_qpid = service['qpId']
+            service_name = service['name']
             return serviceid
 
 def find_branches():
@@ -41,9 +45,9 @@ def find_branches():
 def find_dates():
     # TODO
     # Change this to a system argument after
-    min_day = '3'
-    max_day = '5'
-    year_month = '2021-12-'
+    min_day = '28'
+    max_day = '29'
+    year_month = '2021-11-'
     # TODO
     dates_url = 'https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule/branches/' + city_id + '/dates;servicePublicId=' + serviceid  + ';customSlotLength=10'
 
@@ -55,6 +59,7 @@ def find_dates():
             if date['date'] == chosen_date:
                 global date_id
                 date_id = date['date']
+                print(date_id)
                 return date_id
     print("date not found")
     #TODO
@@ -78,10 +83,20 @@ def find_times():
             for time in times:
                 if str(hm) == time['time']:
                     chosen_time = time
+                    global chosen_hour_min
+                    chosen_hour_min = chosen_time['time']
                     print(chosen_time)
                     return chosen_time
 
+def reserve():
+    form_data = '{"services":[{"publicId":"' + serviceid  + '"}],"custom":"{\"peopleServices\":[{\"publicId\":\"' + serviceid  + '\",\"qpId\":\"' + service_qpid  + '\",\"adult\":1,\"name\":\"' + service_name  + '\",\"child\":0}]}"}'
 
+    reserve_url = 'https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule/branches/' + city_id + '/dates/' + date_id + '/times/' + chosen_hour_min  + '/reserve;customSlotLength=40'
+    print(reserve_url) 
+    print(form_data)
+    with session.post(reserve_url, headers=http_headers, json=form_data) as reserve:
+        print(reserve.text)
+        session.cookies
 
 # Set and get initial cookies required throughout form completion
 with session.get("https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule/configuration"):
@@ -89,6 +104,4 @@ with session.get("https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule
     find_branches()
     find_dates()
     find_times()
-
-
-print(session.cookies)
+    reserve()

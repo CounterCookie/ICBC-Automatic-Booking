@@ -1,0 +1,26 @@
+curl 'https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule/appointments/353de14fc4624be2bee5359d9006bd834954844ee578ca8df9e05e6f6d5a1d9b/confirm' \
+
+
+
+-H 'Connection: keep-alive' \
+-H 'sec-ch-ua: ";Not A Brand";v="99", "Chromium";v="94"' \
+-H 'Accept: application/json, text/plain, */*' \
+-H 'Content-Type: application/json' \
+-H 'X-CSRF-Token: MTAuMTY1LjEzNy4zMVFtYXRpYyBXZWIgQm9va2luZyBpcyB2ZXJ5IHNlY3VyZSBtYWtlIHN1cmUgaXQgaXMuV2VkIFNlcCAyOSAxODo1MjoxNCBQRFQgMjAyMQ==' \
+-H 'sec-ch-ua-mobile: ?0' \
+-H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36' \
+-H 'sec-ch-ua-platform: "Linux"' \
+-H 'Origin: https://onlinebusiness.icbc.com' \
+-H 'Sec-Fetch-Site: same-origin' \
+-H 'Sec-Fetch-Mode: cors' \
+-H 'Sec-Fetch-Dest: empty' \
+-H 'Referer: https://onlinebusiness.icbc.com/qmaticwebbooking/' \
+-H 'Accept-Language: en-GB,en-US;q=0.9,en;q=0.8' \
+-H 'Cookie: JSESSIONID=67F1DC533EFA8EB400C68B5F6870B3DD; TS017453c8=01de3c983f5a243982ab33190084bd0a2978bc2751177406c1b99c8a285c8a6d75ceec470e8586d2beb1b084e5a037f956f4e573b2; BIGipServer~ctn-e-018-prt~dlqwebprd-8080-iapp.app~dlqwebprd-8080-iapp_pool=rd3136o00000000000000000000ffff0aa58a28o8090; TS01eacd98=01de3c983f5a243982ab33190084bd0a2978bc2751177406c1b99c8a285c8a6d75ceec470e8586d2beb1b084e5a037f956f4e573b2' \
+
+
+--data-raw '{"customer":{"firstName":"Jesus","lastName":"Gummer","dateOfBirth":"2004-05-13","email":"test-619pvosj8@srv1.mail-tester.com","phone":"12133734253","dob":"","externalId":""},"languageCode":"en","countryCode":"ca","notificationType":"","captcha":"","custom":"{\"peopleServices\":[{\"publicId\":\"da8488da9b5df26d32ca58c6d6a7973bedd5d98ad052d62b468d3b04b080ea25\",\"qpId\":\"3\",\"adult\":1,\"name\":\"B: Single knowledge test for a new or expired learner’s licence (45 min)\",\"child\":0}],\"totalCost\":0,\"createdByUser\":\"Qmatic Web Booking\",\"paymentRef\":\"\",\"customSlotLength\":40}","notes":"","title":"Qmatic Web Booking"}' \
+
+
+
+--compressed

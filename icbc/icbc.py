@@ -1,7 +1,6 @@
 import json, requests
 
 # So we're not very obvious
-http_headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.0.0 Safari/537.36', 'content-type': 'application/json'}
 session = requests.Session()
 
 def find_services():
@@ -88,21 +87,81 @@ def find_times():
                     print(chosen_time)
                     return chosen_time
 
+
+
 def reserve():
-    form_data = '{"services":[{"publicId":"' + serviceid  + '"}],"custom":"{\"peopleServices\":[{\"publicId\":\"' + serviceid  + '\",\"qpId\":\"' + service_qpid  + '\",\"adult\":1,\"name\":\"' + service_name  + '\",\"child\":0}]}"}'
+    form_data = str('{"services":[{"publicId":"' + serviceid  + '"}],"custom":"{\\"peopleServices\\":[{\\"publicId\\":\\"' + serviceid  + '\\",\\"qpId\\":\\"' + service_qpid  + '\\",\\"adult\\":1,\\"name\\":\\"' + service_name  + '\\",\\"child\\":0}]}"}').encode('utf-8')
 
     reserve_url = 'https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule/branches/' + city_id + '/dates/' + date_id + '/times/' + chosen_hour_min  + '/reserve;customSlotLength=40'
-    print(reserve_url) 
-    print(form_data)
-    with session.post(reserve_url, headers=http_headers, json=form_data) as reserve:
-        print(reserve.text)
-        session.cookies
 
-# Set and get initial cookies required throughout form completion
+    with session.post(reserve_url, headers=http_headers, data=form_data) as reserve_unparsed:
+        reserve_parsed =  json.loads(reserve_unparsed.text)
+        global reservePublicId
+        reservePublicId = reserve_parsed['publicId']
+        print(reservePublicId)
+
+
+def checkmultiple():
+    checkmultiple_url = 'https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule/appointments/checkMultiple;phone=' + phoneNumber  + ';email=' + emailAddress  + ';firstName=' + firstName  + ';lastName=' + lastName  + ';branchPublicId=' + city_id  + ';servicePublicId=' + serviceid  + ';date=' + date_id + ';time=' + chosen_hour_min
+
+    with session.get(checkmultiple_url, headers=http_headers) as checkMultiple:
+        response = json.loads(checkMultiple.text)
+        
+    if response['message'] == 'ERROR_MULTI_GLOBAL':
+        print("Customer already exists.")
+        exit(1)
+
+
+
+
+def matchcustomer():
+    form_data = str('{"email":\"' + emailAddress  + '\","phone":\"' + phoneNumber  + '\","firstName":\"' + firstName  + '\","lastName":\"' + lastName  + '\","dateOfBirth":\"' + datesOfBirth  + '\","externalId":""}').encode('utf-8')
+
+    matchcustomer_url = 'https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule/matchCustomer'
+
+    with session.post(matchcustomer_url, headers=http_headers, data=form_data) as match:
+        response = json.loads(match.text)
+    if response['allowOverwrite'] != False:
+        print("Not allowed to overwrrite(?)")
+        exit(1)
+
+
+def bookAndConfirm():
+    form_data = str('{"customer":{"firstName":"' + firstName  + '","lastName":"' + lastName  + '","dateOfBirth":"' + datesOfBirth  + '","email":"' + emailAddress  + '","phone":"' + phoneNumber  + '","dob":"","externalId":""},"languageCode":"en","countryCode":"ca","notificationType":"","captcha":"","custom":"{\\"peopleServices\\":[{\\"publicId\\":\\"' + serviceid  + '\\",\\"qpId\\":\\"' + service_qpid  + '\\",\\"adult\\":1,\\"name\\":\\"' + service_name  + '\\",\\"child\\":0}],\\"totalCost\\":0,\\"createdByUser\\":\\"Qmatic Web Booking\\",\\"paymentRef\\":\\"\\",\\"customSlotLength\\":40}","notes":"","title":"Qmatic Web Booking"}').encode('utf-8')
+
+    confirm_url = 'https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule/appointments/' + reservePublicId  + '/confirm'
+    with session.post(confirm_url, headers=http_headers, data=form_data) as confirm:
+        print(confirm.text)
+    
+
+
+
+
+# Set and get initial cookies and X-token required throughout form completion
 with session.get("https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule/configuration") as init_config:
-    print(json.loads(init_config)['token'])
+    open_token = json.loads(init_config.text)['token']
+
+    http_headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, l ike Gecko) Chrome/74.0.3729.169 Safari/537.36', 'Content-Type': 'application/json', 'X-CSRF-Token': open_token, 'Accept': 'application/json, text/plain, */*', 'Accept-Encoding': 'gzip, deflate, br', 'Accept-Language': 'en-GB,en-US;q=0.9,en;q=0.8', 'Connection': 'keep-alive', 'Host': 'onlinebusiness.icbc.com', 'Origin': 'https://onlinebusiness.icbc.com', 'Referer': 'https://onlinebusiness.icbc.com/qmaticwebbooking/', 'Sec-Fetch-Site': 'same-origin'}
+
+    global phoneNumber 
+    global emailAddress
+    global FirstName   
+    global lastName
+    global datesOfBirth
+
+    # TODO
+    # Customer info
+    phoneNumber     = '12133735252'
+    emailAddress    = 'shaydari20@gmail.com'
+    firstName       = 'Alex'
+    lastName        = 'Jones'
+    datesOfBirth    = '2001-05-13'
+
     find_services()
     find_branches()
     find_dates()
     find_times()
     reserve()
+    checkmultiple()
+    matchcustomer()
+    bookAndConfirm()

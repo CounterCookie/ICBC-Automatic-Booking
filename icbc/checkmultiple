@@ -1,0 +1,24 @@
+curl 'https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule/appointments/checkMultiple;phone=12133734253;email=test-pf2re5o6u@srv1.mail-tester.com;firstName=Javad;lastName=Gommery;branchPublicId=b1d4daefba2458c80d880e3931798ef508477d19f6cf1652327459a4a1a27ee3;servicePublicId=da8488da9b5df26d32ca58c6d6a7973bedd5d98ad052d62b468d3b04b080ea25;date=2021-12-02;time=10:35' \
+-H 'Connection: keep-alive' \
+-H 'sec-ch-ua: ";Not A Brand";v="99", "Chromium";v="94"' \
+-H 'Accept: application/json, text/plain, */*' \
+-H 'sec-ch-ua-mobile: ?0' \
+-H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36' \
+-H 'sec-ch-ua-platform: "Linux"' \
+-H 'Sec-Fetch-Site: same-origin' \
+-H 'Sec-Fetch-Mode: cors' \
+-H 'Sec-Fetch-Dest: empty' \
+-H 'Referer: https://onlinebusiness.icbc.com/qmaticwebbooking/' \
+-H 'Accept-Language: en-GB,en-US;q=0.9,en;q=0.8' \
+-H 'Cookie: TS017453c8=01de3c983f80a930a0f1b7fff7cae5f536b9c1d82227acd310c9dde68c0429931f1d0372fef51b14ec73ad935488a4bbb561c8e416; JSESSIONID=06600C4A7D14F0B71D2F1412F37E5970; BIGipServer~ctn-e-018-prt~dlqwebprd-8080-iapp.app~dlqwebprd-8080-iapp_pool=rd3136o00000000000000000000ffff0aa58a28o8090; TS01eacd98=01de3c983fd36dcff04771934bd29f9f6163386e2bbca377b51970f821432c30536c3ae3f7f5abbd42c6cc9657468cd9633f321395' \
+--compressed
+
+
+
+FAILED RESPONSE:
+
+{"message":"ERROR_MULTI_GLOBAL"}
+
+SUCCESS RESPONSE:
+
+{"message":"MULTIPLE_OK"}

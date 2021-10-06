@@ -133,7 +133,7 @@ def findDates():
                 dateID = date['date']
                 print(dateID)
                 return dateID
-
+    print("No Date")
     raise Exception("Error")
 
 def findTimes():
@@ -157,7 +157,7 @@ def findTimes():
                     chosenHourAndMinutes = chosenTime['time']
                     print(chosenTime)
                     return chosenTime
-
+    print("No Time")
     raise Exception("Error")
 
 
@@ -267,5 +267,3 @@ with session.get("https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule
             matchCustomer()
             bookAndConfirm()
             exit(0)
-            # TODO
-            # Add to for loop all availabe location for a service, when it fails.

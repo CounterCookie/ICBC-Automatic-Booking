@@ -259,7 +259,7 @@ with session.get("https://onlinebusiness.icbc.com/qmaticwebbooking/rest/schedule
                 checkMultiple()
             except:
                 tryNum += 1
-                print("Time or date not found; try count:  ", tryNum)
+                print("Time or date not found; try count:  ", tryNum, "\n")
                 time.sleep(10)
                 break
             reserve()

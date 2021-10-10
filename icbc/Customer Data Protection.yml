@@ -1,0 +1,17 @@
+The program is right now considered complete and working.
+
+Logging:
+  It's better to keep encrypted logs and logrotate to be able to look at flaws for now. and also stdout is not very reliable for keeping logs or keeping the reserve token lamao
+
+
+Getting customer info in the first place:
+  Use an encrypted mail server to receive customer info
+
+Current Method:
+  As of now, how the program works is that I give the customer information to the program via command line options; This method does not store information into any files on the system, but it does store customer info in bash history which is highly inconvenient and improper.
+
+Better Possible Methods:
+  - Use a file in /tmp to store customer info, give that file to python and delete after successful booking
+  - Use an interactive menu to give customer info during runtime
+    - But this will make it hard to reuse customer info on a wrong postal code if implemented wrong, maybe use a /tmp file to store a customer phone number and then delete it on succesful booking or during the successful loops.
+  - 
